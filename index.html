@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href=https://fonts.googleapis.com>
+  <link rel="preconnect" href=https://fonts.gstatic.com crossorigin>
+  <link href=https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <title>Frontend Mentor | Tip calculator app</title>
+
+</head>
+
+<body>
+
+  <main>
+    <img class="logo" src="images/logo.svg">
+
+    <div class="calc-container">
+      <div class="calc">
+
+        <div>
+          <label for="bill">Bill</label><br>
+          <input class="input-val input-dollar" type="number" id="bill" name="bill" placeholder="0"><br>
+        </div>
+        <div class="tip">
+          <span class="select-tip">Select Tip %</span>
+          <div class="precents">
+            <div class="precent" id="val-5">5%</div>
+            <div class="precent" id="val-10">10%</div>
+            <div class="precent" id="val-15">15%</div>
+            <div class="precent" id="val-25">25%</div>
+            <div class="precent" id="val-50">50%</div>
+            <input class="precent" id="custom-precent" type="number" name="custom" placeholder="Custom">
+          </div>
+        </div>
+
+        <div>
+          <label for="num-ppl">Number of People</label><br>
+          <input class="input-val input-person" type="number" id="num-ppl" name="num-ppl" placeholder="0"><br>
+        </div>
+      </div>
+      <div class="view">
+
+        <div class="amount">
+          <div class="caption">
+            <p>Tip Amount</p>
+            <span>/ person</span>
+          </div>
+          <h3>$0.00</h3>
+        </div>
+
+        <div class="total">
+          <div class="caption">
+            <p>Total</p>
+            <span>/ person</span>
+          </div>
+          <h3>$0.00</h3>
+        </div>
+
+        <button id="button">Reset</button>
+
+      </div>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+
+
+</html>
