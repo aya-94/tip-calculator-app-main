@@ -199,3 +199,8 @@ button:hover {
     background-color: hsl(173deg 61% 77%);
     color: hsl(183, 100%, 15%);
 }
+
+.precent.active {
+    background-color: hsl(172, 67%, 45%);
+    color: hsl(183, 100%, 15%);
+}
