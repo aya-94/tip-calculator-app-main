@@ -21,91 +21,106 @@ val15.value = 15;
 val25.value = 25;
 val50.value = 50;
 
-  const precentVal = () => {
+// removing styles from precent buttons
+const removeActivePrecent = () => {
     precentsArray.forEach(element => {
+        element.classList.remove("active");
+    })
+}
+
+// applying active class on current precent button and getting the precent value
+const precentVal = () => {
+    precentsArray.forEach(element => {
+        // applying active class on current precent button
         element.addEventListener('click', () => {
-            precentsArray.forEach(element => {
-                element.classList.remove("active");
-            })
+            removeActivePrecent();
+
+            // getting the precent value
             if(element !== customPrecent) {
                 element.classList.add("active");
             }
+
             if(element.value > 0) {
-                tipPrecent = element.value
+                tipPrecent = element.value;
             } else {
+                // tip precent for custom value
                 customPrecent.addEventListener("keyup", () => {
                     tipPrecent = customPrecent.value;
                 })
             }
-            console.log(tipPrecent)
         })
     });
-  }
-  precentVal();
+}
+precentVal();
 
-  const billVal = () => {
+// changing the bill value from string to number
+const billVal = () => {
     return Number(bill.value);
-  }
+}
 
-  const peopleVal = () => {
-    if(people.value <= 0){
-        console.log('cannot be 0')
-    } else {
+// changing the people value from string to number
+const peopleVal = () => {
+    if(people.value > 0){
         return Number(people.value);
     }
-  }
+}
 
-  const calculateTip = (bill, customPrecent, people) => {
-    let tip = bill * (customPrecent * 0.01)
-    let tipResults = (tip / people).toFixed(2)
-    console.log(tipResults)
-    tipAmount.innerHTML = `$${tipResults}`
-  }
+// calculating the tip and presenting it on the screen
+const calculateTip = (bill, customPrecent, people) => {
+    let tip = bill * (customPrecent * 0.01);
+    let tipResults = (tip / people).toFixed(2);
+    tipAmount.innerHTML = `$${tipResults}`;
+}
 
+// calculating the total and presenting it on the screen
+const calculateTotal = (bill, customPrecent, people) => {
+    let total = bill + (bill * (customPrecent * 0.01));
+    let totalResults = (total / people).toFixed(2);
+    totalAmount.innerHTML = `$${totalResults}`;
+}
 
-  const calculateTotal = (bill, customPrecent, people) => {
-    let total = bill + (bill * (customPrecent * 0.01))
-    let totalResults = (total / people).toFixed(2)
-    console.log(totalResults)
-    totalAmount.innerHTML = `$${totalResults}`
-  }
-
-  const inputError = () => {
+//  applying styles when error accurs
+const inputError = () => {
     people.classList.add("error-input-active");
     errorSpan.classList.add("error-span-active");
-  }
+}
 
-  button.addEventListener("click", function() {
-    console.log(tipPrecent)
+// removing error style incase error is active
+const removingInputError = () => {
     people.classList.remove("error-input-active");
     errorSpan.classList.remove("error-span-active");
+}
+
+// reseting all the values
+const resetValues = () => {
+    bill.value = '';
+    people.value = '';
+    customPrecent.value = '';
+    tipAmount.innerHTML = '$0.00';
+    totalAmount.innerHTML = '$0.00';
+    removingInputError();
+    removeActivePrecent();
+}
+
+button.addEventListener("click", function() {
+    removingInputError();
+
+    // if isReset is false and number or people is 1+ 
+    // we calculate the tip and change isReset value to true
     if(!isReset) {
-        if(billVal() && peopleVal()) {
+        if(peopleVal()) {
             calculateTip(billVal(), Number(tipPrecent), peopleVal())
             calculateTotal(billVal(), Number(tipPrecent), peopleVal())
-            isReset = true;
+            isReset = !isReset;
         } else {
-            console.log('error')
             inputError()
         }       
     } else {
-        bill.value = '';
-        people.value = '';
-        customPrecent.value = '';
-        tipAmount.innerHTML = '$0.00';
-        totalAmount.innerHTML = '$0.00';
-        people.classList.remove("error-input-active");
-        errorSpan.classList.remove("error-span-active");
-
-        precentsArray.forEach(element => {
-            precentsArray.forEach(element => {
-                element.classList.remove("active");
-            })
-        })
-        isReset = false; 
+        // if isReset is true, we reset all the values and change it to false
+        resetValues();
+        isReset = !isReset; 
     }
-    // isReset = !isReset;
-  })
+})
 
   
 
