@@ -19,15 +19,11 @@ main {
 }
 
 .logo {
-    padding: 120px;
+    padding: 11.7vh;
 }
 
 .calc-container {
     margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 920px;
     height: 480px;
     background-color: #fff;
@@ -220,4 +216,90 @@ button:hover {
 .precent.active {
     background-color: hsl(172, 67%, 45%);
     color: hsl(183, 100%, 15%);
+}
+
+/* small height */
+@media only screen and (max-height: 850px) {
+    .logo {
+        padding: 7vh;
+    }
+}
+
+/* small screens */
+@media only screen and (max-width: 1000px) {
+    .calc-container {
+        width: 375px;
+        height: 825px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .calc {
+        margin: 0;
+        align-items: center;
+    }
+
+    .input-val {
+        width: 296px;
+        height: 50px;
+    }
+
+    .precents {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        row-gap: 17px;
+        column-gap: 17px;
+        margin-top: 15px;
+    }
+
+    .precents div {
+        width: 147px;
+        height: 50px;
+
+    }
+
+    .precents input {
+        width: 117px;
+        height: 50px;
+    }
+
+    .bill {
+        margin-top: 10px;
+    }
+
+    .tip {
+        margin-top: 40px;
+    }
+
+    .people {
+        margin-top: 40px;
+    }
+
+    .view {
+        width: 327px;
+        height: 257px;
+        margin-top: 35px;
+    }
+
+    .view h3 {
+        color: hsl(172, 67%, 45%);
+        font-size: 35px;
+        margin: 0;
+    }
+
+    .amount {
+        margin: 28px 25px 0 25px;
+    }
+
+    .total {
+        margin: 16px 25px 0 25px;
+    }
+
+    button {
+        width: 280px;
+        height: 50px;
+        margin-top: 35px;
+    }
 }
