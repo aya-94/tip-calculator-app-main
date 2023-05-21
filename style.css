@@ -19,7 +19,7 @@ main {
 }
 
 .logo {
-    margin-top: 160px;
+    padding: 120px;
 }
 
 .calc-container {
@@ -69,16 +69,6 @@ input::-webkit-inner-spin-button {
     font-family: 'Space Mono', monospace;
 }
 
-.input-dollar {
-    background: url(images/icon-dollar.svg) no-repeat scroll 18px 17px, hsl(189, 41%, 97%);
-    margin-top: 5px;
-}
-
-.input-person {
-    background: url(images/icon-person.svg) no-repeat scroll 18px 17px, hsl(189, 41%, 97%);
-    margin-top: 5px;
-}
-
 .input-val:focus {
     outline-color: hsl(172, 67%, 45%);
 }
@@ -88,6 +78,33 @@ input::-webkit-inner-spin-button {
     font-weight: 700;
     color: hsl(184, 14%, 56%);
     font-size: 24px;
+}
+
+#bill {
+    background: url(images/icon-dollar.svg) no-repeat scroll 18px 17px, hsl(189, 41%, 97%);
+    margin-top: 5px;
+    border-width: 0px;
+    border-style: solid;
+    border-color: hsl(9.47deg 44.19% 57.84%);
+}
+
+#num-ppl {
+    background: url(images/icon-person.svg) no-repeat scroll 18px 17px, hsl(189, 41%, 97%);
+    margin-top: 5px;
+}
+
+.error-span {
+    margin-left: 115px;
+    color: hsl(9.47deg 44.19% 57.84%);
+    display: none;
+}
+
+.error-span-active {
+    display: inline;
+}
+
+.error-input-active {
+    border: 2px solid hsl(9.47deg 44.19% 57.84%);
 }
 
 .precents {
@@ -172,11 +189,11 @@ input::-webkit-inner-spin-button {
 }
 
 .amount {
-    margin-top: 40px;
+    margin: 42px 42px 0 42px;
 }
 
 .total {
-    margin-top: 30px;
+    margin: 30px 42px 0 42px;
 }
 
 button {
