@@ -19,7 +19,7 @@ main {
 }
 
 .logo {
-    padding: 11.7vh;
+    padding: 15vh 0 8.5vh 0;
 }
 
 .calc-container {
@@ -207,6 +207,10 @@ button {
     cursor: pointer;
 }
 
+.disable-button {
+    opacity: 20%;
+}
+
 .precents div:hover,
 button:hover {
     background-color: hsl(173deg 61% 77%);
@@ -216,13 +220,6 @@ button:hover {
 .precent.active {
     background-color: hsl(172, 67%, 45%);
     color: hsl(183, 100%, 15%);
-}
-
-/* small height */
-@media only screen and (max-height: 850px) {
-    .logo {
-        padding: 7vh;
-    }
 }
 
 /* small screens */

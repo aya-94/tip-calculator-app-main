@@ -21,6 +21,22 @@ val15.value = 15;
 val25.value = 25;
 val50.value = 50;
 
+// unable & disable button
+const success = () => {
+    console.log(tipPrecent)
+    if (bill.value.trim() == '' || people.value.trim() == '' || tipPrecent == undefined) {
+        button.classList.add("disable-button");
+        button.disabled = true;
+    } else {
+        button.classList.remove("disable-button");
+        button.disabled = false;
+    }
+}
+
+bill.addEventListener("keyup", success);
+customPrecent.addEventListener("keyup", success);
+people.addEventListener("keyup", success);
+
 // removing styles from precent buttons
 const removeActivePrecent = () => {
     precentsArray.forEach(element => {
@@ -100,6 +116,7 @@ const resetValues = () => {
     totalAmount.innerHTML = '$0.00';
     removingInputError();
     removeActivePrecent();
+    success();
 }
 
 button.addEventListener("click", function() {
