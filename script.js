@@ -49,7 +49,9 @@ const precentVal = () => {
     precentsArray.forEach(element => {
         // applying active class on current precent button
         element.addEventListener('click', () => {
+            success();
             removeActivePrecent();
+            
 
             // getting the precent value
             if(element !== customPrecent) {
