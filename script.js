@@ -1,41 +1,41 @@
 'use strict';
 
-const button = document.getElementById("button");
-const bill = document.getElementById("bill");
-const customPrecent = document.getElementById("custom-precent");
-const people = document.getElementById("num-ppl");
-const tipAmount = document.getElementById("tip-amount");
-const totalAmount = document.getElementById("total");
-const errorSpan = document.querySelector(".error-span");
+const buttonEl = document.getElementById("button");
+const billEl = document.getElementById("bill");
+const customPrecentEl = document.getElementById("custom-precent");
+const peopleEl = document.getElementById("num-ppl");
+const tipAmountEl = document.getElementById("tip-amount");
+const totalAmountEl = document.getElementById("total");
+const errorSpanEl = document.querySelector(".error-span");
 const val5 = document.getElementById("val-5");
 const val10 = document.getElementById("val-10");
 const val15 = document.getElementById("val-15");
 const val25 = document.getElementById("val-25");
 const val50 = document.getElementById("val-50");
 const precentsArray = document.querySelectorAll(".precent");
+
 let tipPrecent;
 let isReset = false;
-val5.value = 5;
-val10.value = 10;
-val15.value = 15;
-val25.value = 25;
-val50.value = 50;
 
-// unable & disable button
-const success = () => {
-    console.log(tipPrecent)
-    if (bill.value.trim() == '' || people.value.trim() == '' || tipPrecent == undefined) {
-        button.classList.add("disable-button");
-        button.disabled = true;
-    } else {
-        button.classList.remove("disable-button");
-        button.disabled = false;
-    }
+// assigning value to buttons
+const precentButtonVal = () => {
+    val5.value = 5;
+    val10.value = 10;
+    val15.value = 15;
+    val25.value = 25;
+    val50.value = 50;
 }
 
-bill.addEventListener("keyup", success);
-customPrecent.addEventListener("keyup", success);
-people.addEventListener("keyup", success);
+// unable & disable button
+const toggleButton = () => {
+    if (billEl.value.trim() === '' || peopleEl.value.trim() === '' || tipPrecent === undefined) {
+        buttonEl.classList.add("disable-button");
+        buttonEl.disabled = true;
+    } else {
+        buttonEl.classList.remove("disable-button");
+        buttonEl.disabled = false;
+    }
+}
 
 // removing styles from precent buttons
 const removeActivePrecent = () => {
@@ -49,87 +49,83 @@ const precentVal = () => {
     precentsArray.forEach(element => {
         // applying active class on current precent button
         element.addEventListener('click', () => {
-            success();
             removeActivePrecent();
-            
 
             // getting the precent value
-            if(element !== customPrecent) {
+            if(element !== customPrecentEl) {
                 element.classList.add("active");
             }
 
+            // assigning value to the tip precent
             if(element.value > 0) {
-                tipPrecent = element.value;
-            } else {
-                // tip precent for custom value
-                customPrecent.addEventListener("keyup", () => {
-                    tipPrecent = customPrecent.value;
-                })
+                tipPrecent = element.value;  
             }
+            toggleButton();
         })
     });
 }
-precentVal();
 
-// changing the bill value from string to number
-const billVal = () => {
-    return Number(bill.value);
+// changing the value from string to number
+const stringToNum = (el) => {
+    return Number(el.value);
 }
 
-// changing the people value from string to number
-const peopleVal = () => {
-    if(people.value > 0){
-        return Number(people.value);
-    }
-}
-
-// calculating the tip and presenting it on the screen
-const calculateTip = (bill, customPrecent, people) => {
+// calculating the tip and total to present it on the screen
+const calculate = (bill, customPrecent, people) => {
     let tip = bill * (customPrecent * 0.01);
     let tipResults = (tip / people).toFixed(2);
-    tipAmount.innerHTML = `$${tipResults}`;
-}
-
-// calculating the total and presenting it on the screen
-const calculateTotal = (bill, customPrecent, people) => {
     let total = bill + (bill * (customPrecent * 0.01));
     let totalResults = (total / people).toFixed(2);
-    totalAmount.innerHTML = `$${totalResults}`;
+    totalAmountEl.innerHTML = `$${totalResults}`;
+    tipAmountEl.innerHTML = `$${tipResults}`;
 }
 
 //  applying styles when error accurs
 const inputError = () => {
-    people.classList.add("error-input-active");
-    errorSpan.classList.add("error-span-active");
+    peopleEl.classList.add("error-input-active");
+    errorSpanEl.classList.add("error-span-active");
 }
 
 // removing error style incase error is active
 const removingInputError = () => {
-    people.classList.remove("error-input-active");
-    errorSpan.classList.remove("error-span-active");
+    peopleEl.classList.remove("error-input-active");
+    errorSpanEl.classList.remove("error-span-active");
 }
 
 // reseting all the values
 const resetValues = () => {
-    bill.value = '';
-    people.value = '';
-    customPrecent.value = '';
-    tipAmount.innerHTML = '$0.00';
-    totalAmount.innerHTML = '$0.00';
+    billEl.value = '';
+    peopleEl.value = '';
+    customPrecentEl.value = '';
+    tipAmountEl.innerHTML = '$0.00';
+    totalAmountEl.innerHTML = '$0.00';
+    buttonEl.innerHTML = 'Calculate';
     removingInputError();
     removeActivePrecent();
-    success();
+    toggleButton();
 }
 
-button.addEventListener("click", function() {
+precentButtonVal();
+precentVal();
+
+billEl.addEventListener("keyup", toggleButton);
+customPrecentEl.addEventListener("keyup", toggleButton);
+peopleEl.addEventListener("keyup", toggleButton);
+
+// tip precent for custom value
+customPrecentEl.addEventListener("keyup", () => {
+    tipPrecent = customPrecentEl.value;
+});
+
+buttonEl.addEventListener("click", function() {
     removingInputError();
 
     // if isReset is false and number or people is 1+ 
     // we calculate the tip and change isReset value to true
     if(!isReset) {
-        if(peopleVal()) {
-            calculateTip(billVal(), Number(tipPrecent), peopleVal())
-            calculateTotal(billVal(), Number(tipPrecent), peopleVal())
+        if(peopleEl.value > 0) {
+            calculate(stringToNum(billEl), Number(tipPrecent), stringToNum(peopleEl));
+            buttonEl.innerHTML = 'Reset';
             isReset = !isReset;
         } else {
             inputError()
@@ -140,7 +136,3 @@ button.addEventListener("click", function() {
         isReset = !isReset; 
     }
 })
-
-  
-
-  

@@ -222,6 +222,13 @@ button:hover {
     color: hsl(183, 100%, 15%);
 }
 
+/* small height */
+@media only screen and (max-height: 800px) {
+    .logo {
+        padding: 8vh 0 8.5vh 0;
+    }
+}
+
 /* small screens */
 @media only screen and (max-width: 1000px) {
     .calc-container {
